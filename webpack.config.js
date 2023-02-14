@@ -45,6 +45,17 @@ module.exports = {
                     'stylus-loader', // 将stylus文件编译为css文件
                 ],
             },
+            { // 处理图片资源 不需要额外添加loader webpack本身就有这个能力我们只是开启这个能力
+                test: /\.(jpe?g|png|gif|svg|webp)$/,
+                type: "asset",
+                parser: {
+                    dataUrlCondition: {
+                        // 小于10kb转成base64
+                        // 优点： 减少请求数量， 缺点： 体积会更大
+                        maxSize: 10 * 1024
+                    }
+                }
+            }
         ]
     },
     // 插件
